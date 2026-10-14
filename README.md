@@ -356,7 +356,7 @@ En el comentario deberás incluir la URL de tu repositorio de GitHub.
 Ejemplo:
 
 ```text
-https://github.com/TU_USUARIO/examenVillanos
+https://github.com/mgarridol16/examenVillanos.git
 ```
 
 ### Condiciones de entrega
