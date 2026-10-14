@@ -58,7 +58,7 @@ class GestionAppPlantillas:
             nombre = nombre.strip().lower()
             apellidos = apellidos.strip().lower()
             rol = rol.strip().lower()
-            if rol not in ("entrenador ", "utillero"):
+            if rol not in ("entrenador", "utillero"):
                 raise ValueError("Rol no valida escribe : entrenador , utillero")
             nuevoMiembro = CuerpoTecnico(id, nombre, apellidos, rol)
             plantilla[nuevoMiembro.identificador] = nuevoMiembro
@@ -87,3 +87,28 @@ class GestionAppPlantillas:
             logger.exception("Error en agregar miembro cuerpo tecnico.")
             print("Se ha producido un error. Consulta el archivo aplicacion.log.")
             return None
+
+    def listarPlantilla(self):
+        if len(plantilla) == 0:
+            logger.error("La plantilla esta vacia no podemos listarla")
+            print("No hay plantilla: esta vacia")
+        else:
+            print("========== PLANTILLA DE FÚTBOL ==========\n")
+            for miembro in plantilla.values():
+                tipoMiembro = " "
+                if type(miembro) == Jugador:
+                    tipoMiembro = "Jugador"
+                elif type(miembro) == CuerpoTecnico:
+                    tipoMiembro = "CuerpoTecnico"
+
+                print(f"ID: {miembro.identificador}")
+                print(f"Tipo: {tipoMiembro}")
+                print(f"Nombre: {miembro.nombre}")
+                print(f"Apellidos: {miembro.apellidos}")
+
+                if tipoMiembro == "Jugador":
+                    print(f"Posicion: {miembro.posicion}")
+                elif tipoMiembro == "CuerpoTecnico":
+                    print(f"Rol: {miembro.rol}")
+            print("-----------------------------------------\n")
+

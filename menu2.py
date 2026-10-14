@@ -25,7 +25,9 @@ class Menu2:
                 opcion = input("Elige una opción: ").strip()
                 if opcion == "1":
                     self._agregarMiembro()
+                    print("has elegido agregar miembro")
                 elif opcion == "2":
+                    self._listarPlantilla()
                     print("has elegido listar plantilla")
                 elif opcion == "3":
                     print("has elegido crear plantilla")
@@ -78,5 +80,9 @@ class Menu2:
                 else:
                     print("Opción no válida.")
                     logger.warning("Opción de crear jugador o tecnico no válida: %s", opcion)
+
+    def _listarPlantilla(self):
+        self.gestion.listarPlantilla()
+
 
 
