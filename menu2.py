@@ -1,13 +1,13 @@
 """Menú de consola de la aplicación."""
 
 import logging
-from gestion import Gestion
+from gestionAppPlantillasFutbol import GestionAppPlantillas
 
 logger = logging.getLogger(__name__)
 
 
 class Menu2:
-    def __init__(self, gestion: Gestion):
+    def __init__(self, gestion: GestionAppPlantillas):
         self.gestion = gestion
 
     def mostrar(self) -> None:
@@ -24,7 +24,7 @@ class Menu2:
             try:
                 opcion = input("Elige una opción: ").strip()
                 if opcion == "1":
-                    print("has elegido agregar miembro")
+                    self._agregarMiembro()
                 elif opcion == "2":
                     print("has elegido listar plantilla")
                 elif opcion == "3":
@@ -46,5 +46,37 @@ class Menu2:
             except Exception:
                 logger.exception("Error no controlado en el menú.")
                 print("Se ha producido un error. Consulta el archivo aplicacion.log.")
+
+    def _agregarMiembro(self):
+        while True:
+            print("¿Que tipo de miembro quieres agregar?")
+            print("1. Jugador")
+            print("2. Cuerpo técnico")
+            opcion = input("Selecciona una opcion: ").strip()
+
+            if opcion in ["1", "2"]:
+                if opcion == "1":
+                    id = input("Elige una id: ").strip()
+                    nombre = input("Elige un nombre: ").strip()
+                    apellido1 = input("Elige un apellido 1: ").strip()
+                    apellido2 = input("Elige un apellido 2: ").strip()
+                    apellidos = f"{apellido1} {apellido2}"
+                    posicion = input("Elige un posicion [portero, defensa, centrocampista o delantero]: ").strip()
+                    miembro = self.gestion.agregarMiembroJuga(id, nombre, apellidos, posicion)
+                    print(f"Jugador añadido correctamente: {miembro.nombre}")
+                    break
+                if opcion == "2":
+                    id = input("Elige una id: ").strip()
+                    nombre = input("Elige un nombre: ").strip()
+                    apellido1 = input("Elige un apellido 1: ").strip()
+                    apellido2 = input("Elige un apellido 2: ").strip()
+                    apellidos = f"{apellido1} {apellido2}"
+                    rol = input("Elige un posicion [entrenador, utillero]: ").strip()
+                    miembro = self.gestion.agregarMiembroTecnico(id, nombre, apellidos, rol)
+                    print(f"Jugador añadido correctamente: {miembro.nombre}")
+                    break
+                else:
+                    print("Opción no válida.")
+                    logger.warning("Opción de crear jugador o tecnico no válida: %s", opcion)
 
 

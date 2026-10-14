@@ -112,3 +112,49 @@ class Villano(Personaje):
             "ausencias",
             "hablador",
         )
+
+class Miembro(ABC):
+    """Clase base común para jugadores y cuerpo tecnico."""
+
+    def __init__(self, identificador: str, nombre: str, apellidos: str):
+        if not nombre or not nombre.strip():
+            raise ValueError("El nombre no puede estar vacío.")
+        if not apellidos or not apellidos.strip():
+            raise ValueError("Los apellidos no pueden estar vacíos.")
+
+        self.identificador = identificador
+        self.nombre = nombre.strip()
+        self.apellidos = apellidos.strip()
+
+    def obtener_datos(self) -> dict:
+        """Devuelve los datos del personaje en un diccionario."""
+        return {
+            "identificador": self.identificador,
+            "tipo": self.__class__.__name__,
+            "nombre": self.nombre,
+            "apellidos": self.apellidos,
+        }
+
+class Jugador(Miembro):
+    """Jugador que extiende de Miembro"""
+    posicion = ""
+    def __init__(self, identificador: str, nombre: str, apellidos: str, posicion: str):
+        super().__init__(identificador, nombre, apellidos)
+        if not isinstance(posicion, str) or not posicion in ("portero", "defensa", "centrocampista", "delantero"):
+            raise ValueError("la posicion debe ser portero, defensa, centrocampista o delantero")
+
+        self.posicion = posicion
+
+class CuerpoTecnico(Miembro):
+    """Cuerpo tecnico extiende de Miembro"""
+    rol = ""
+
+    def __init__(self, identificador: str, nombre: str, apellidos: str, rol: str):
+        super().__init__(identificador, nombre, apellidos)
+        if not isinstance(rol, str) or not rol in ("entrenador ", "utillero"):
+            raise ValueError("el rol debe ser entrenador, utillero")
+
+        self.rol = rol
+
+
+

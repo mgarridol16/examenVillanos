@@ -2,6 +2,7 @@
 
 import logging
 from gestion import Gestion
+from gestionAppPlantillasFutbol import  GestionAppPlantillas
 from menu import Menu
 from menu2 import Menu2
 import os
@@ -44,7 +45,7 @@ def main() -> None:
                     menu = Menu(gestion)
                     menu.mostrar()
                 elif opciones == "2":
-                    gestion2 = Gestion()
+                    gestion2 = GestionAppPlantillas()
                     menu2 = Menu2(gestion2)
                     menu2.mostrar()
                 elif opciones == "0":
