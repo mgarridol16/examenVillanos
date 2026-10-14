@@ -1,5 +1,5 @@
 """Operaciones de gestión de app plantillas."""
-
+import os
 from datetime import date
 import logging
 import random
@@ -26,6 +26,26 @@ class GestionAppPlantillas:
             plantilla[nuevoMiembro.identificador] = nuevoMiembro
             logger.info("Personaje jugador agregado con exito")
             print("Personaje jugador agregado con exito")
+
+
+            carpeta = "registroSQL"
+            if not os.path.exists(carpeta):
+                os.makedirs(carpeta)
+
+            ruta_salida = f"{carpeta}/personaje{nuevoMiembro.identificador}insertado.sql"
+
+            with open(ruta_salida, "w", encoding="utf-8") as f:
+                    id = int (nuevoMiembro.identificador)
+                    nombre = nuevoMiembro.nombre
+                    apellidos = nuevoMiembro.apellidos
+                    posicion = nuevoMiembro.posicion
+
+                    f.write(f"INSERT INTO jugador (id, nombre, apellidos, posicion) VALUES ({id}, '{nombre}','{apellidos}','{posicion}')\n")
+                    f.flush()
+
+            logging.info("JUGADOR ESCRITO EN SQL")
+
+
             return nuevoMiembro
         except Exception:
             logger.exception("Error en agregar miembro jugador.")
@@ -44,6 +64,24 @@ class GestionAppPlantillas:
             plantilla[nuevoMiembro.identificador] = nuevoMiembro
             logger.info("Personaje cuerpo tecnico agregado con exito")
             print("Personaje cuerpo tecnico agregado con exito")
+
+            carpeta = "registroSQL"
+            if not os.path.exists(carpeta):
+                os.makedirs(carpeta)
+
+            ruta_salida = f"{carpeta}/personaje{nuevoMiembro.identificador}insertado.sql"
+
+            with open(ruta_salida, "w", encoding="utf-8") as f:
+                id = int (nuevoMiembro.identificador)
+                nombre = nuevoMiembro.nombre
+                apellidos = nuevoMiembro.apellidos
+                rol = nuevoMiembro.rol
+
+                f.write(f"INSERT INTO jugador (id, nombre, apellidos, posicion) VALUES ({id},'{nombre}','{apellidos}','{rol}');\n")
+                f.flush()
+
+            logging.info("JUGADOR ESCRITO EN SQL")
+
             return nuevoMiembro
         except Exception:
             logger.exception("Error en agregar miembro cuerpo tecnico.")
