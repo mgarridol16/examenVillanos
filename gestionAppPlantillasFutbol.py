@@ -77,7 +77,7 @@ class GestionAppPlantillas:
                 apellidos = nuevoMiembro.apellidos
                 rol = nuevoMiembro.rol
 
-                f.write(f"INSERT INTO jugador (id, nombre, apellidos, posicion) VALUES ({id},'{nombre}','{apellidos}','{rol}');\n")
+                f.write(f"INSERT INTO miembro (id, nombre, apellidos, posicion) VALUES ({id},'{nombre}','{apellidos}','{rol}');\n")
                 f.flush()
 
             logging.info("JUGADOR ESCRITO EN SQL")
